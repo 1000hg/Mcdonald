@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LbMcdonald.model
+namespace LbMcdonald.Model
 {
-    class Payment
+    public enum ePayment
     {
+        CARD,
+        CASH
     }
 }

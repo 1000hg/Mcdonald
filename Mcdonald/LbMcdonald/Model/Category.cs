@@ -4,12 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McdonaldLibrary
+namespace LbMcdonald.Model
 {
     public enum eCategory
     {
-        Sandwich,
-        Dessert,
-        Drink
+        None = 0,
+        Breakfast,
+        Burger,
+        Drink,
+        Side
+    }
+
+    public class Category
+    {
+        public String Title { get; set; }
+        public String ImagePath { get; set; }
     }
 }

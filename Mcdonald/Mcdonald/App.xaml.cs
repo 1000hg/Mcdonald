@@ -13,5 +13,7 @@ namespace Mcdonald
     /// </summary>
     public partial class App : Application
     {
+        public static CategoryDataSource CategoryData = new CategoryDataSource();
+        public static FoodDataSorce FoodData = new FoodDataSorce();
     }
 }

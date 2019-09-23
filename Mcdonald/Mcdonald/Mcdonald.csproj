@@ -55,9 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Menu.cs" />
-    <Compile Include="Model\Statistics.cs" />
-    <Compile Include="Model\Table.cs" />
+    <Compile Include="DataSource\FoodDataSource.cs" />
+    <Compile Include="DataSource\CategoryDataSource.cs" />
+    <Compile Include="Manager\CategoryManager.cs" />
     <Compile Include="View\OrderWindow.xaml.cs">
       <DependentUpon>OrderWindow.xaml</DependentUpon>
     </Compile>
@@ -103,6 +103,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Mcdonald_logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\CategoryImage\all.jpg" />
+    <Resource Include="Assets\CategoryImage\breakfast.jpg" />
+    <Resource Include="Assets\CategoryImage\burger.jpg" />
+    <Resource Include="Assets\CategoryImage\drink.jpg" />
+    <Resource Include="Assets\CategoryImage\side.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LbMcdonald\LbMcdonald.csproj">
+      <Project>{90561872-8945-4512-BA83-5B5802D8F2DF}</Project>
+      <Name>LbMcdonald</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\FoodImage\big mac.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\FoodImage\coca cola.jpg" />
+    <Resource Include="Assets\FoodImage\chcolate shake.jpg" />
+    <Resource Include="Assets\FoodImage\cheeseburger.jpg" />
+    <Resource Include="Assets\FoodImage\double quater pounder with cheese.jpg" />
+    <Resource Include="Assets\FoodImage\egg mcmuffin.jpg" />
+    <Resource Include="Assets\FoodImage\fanta.jpg" />
+    <Resource Include="Assets\FoodImage\iced tea.jpg" />
+    <Resource Include="Assets\FoodImage\mcdouble.jpg" />
+    <Resource Include="Assets\FoodImage\quarter pounder with cheese.jpg" />
+    <Resource Include="Assets\FoodImage\salad.jpg" />
+    <Resource Include="Assets\FoodImage\sausage biscuit with egg.jpg" />
+    <Resource Include="Assets\FoodImage\sausage biscuit.jpg" />
+    <Resource Include="Assets\FoodImage\sausage mcmuffin with egg.jpg" />
+    <Resource Include="Assets\FoodImage\sausage mcmuffin.jpg" />
+    <Resource Include="Assets\FoodImage\sprite.jpg" />
+    <Resource Include="Assets\FoodImage\strawberry shake.jpg" />
+    <Resource Include="Assets\FoodImage\vanilla cone.jpg" />
+    <Resource Include="Assets\FoodImage\world famous fries.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
