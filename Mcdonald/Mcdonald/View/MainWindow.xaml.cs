@@ -27,7 +27,8 @@ namespace Mcdonald
 
         private List<Food> foods = new List<Food>();
 
-        private List<Food> selectedFoods = new List<Food>();
+        private Seat seat = new Seat();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -94,7 +95,7 @@ namespace Mcdonald
             food.Count++;
             if (food.Count == 1)
             {
-                selectedFoods.Add(food);
+                seat.FoodList.Add(food);
             }
             updateSelectedFood();
         }
@@ -104,15 +105,21 @@ namespace Mcdonald
             food.Count--;
             if (food.Count == 0)
             {
-                selectedFoods.Remove(food);
+                seat.FoodList.Remove(food);
             }
             updateSelectedFood();
         }
 
         private void updateSelectedFood()
         {
-            lvSelected.ItemsSource = selectedFoods;
+            lvSelected.ItemsSource = seat.FoodList;
+            TotalPrice.Text = seat.TotalPrice.ToString();
             lvSelected.Items.Refresh();
+        }
+
+        private void PaymentBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

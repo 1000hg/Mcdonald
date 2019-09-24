@@ -46,7 +46,7 @@
     <Compile Include="Model\Payment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Statistics.cs" />
-    <Compile Include="Model\Table.cs" />
+    <Compile Include="Model\Seat.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

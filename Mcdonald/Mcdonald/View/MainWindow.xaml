@@ -40,6 +40,7 @@
             <Setter Property="Width" Value="130" />
             <Setter Property="Padding" Value="10" />
             <Setter Property="Margin" Value="10" />
+            <Setter Property="IsEnabled" Value="False" />
         </Style>
         <Style x:Key="FoodCountBtn" TargetType="Button">
             <Setter Property="Width" Value="40" />
@@ -65,15 +66,42 @@
         <Style x:Key="SelectedCountStyle" TargetType="TextBlock">
             
         </Style>
+        <Style x:Key="TotalPriceStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style x:Key="PaymentStyle" TargetType="ComboBox">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Margin" Value="20" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#CED4DA" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="SelectedIndex" Value="0" />
+        </Style>
+        <Style x:Key="PaymentItemStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+        <Style x:Key="PaymentBtnStyle" TargetType="Button">
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Content" Value="PAYMENT" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Background" Value="#FF2121" />
+            <Setter Property="Foreground" Value="#FFC323" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70" />
+            <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image Source="/Assets/Mcdonald_logo.jpg" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" />
+            <Image Source="/Assets/Mcdonald_logo.jpg" Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -83,7 +111,19 @@
                 <ColumnDefinition Width="230" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <ListView x:Name="lvCategory" SelectionChanged="LvCategory_SelectionChanged">
+                <ListView x:Name="lvCategory" SelectionChanged="LvCategory_SelectionChanged"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Vertical"></WrapPanel>
@@ -101,6 +141,18 @@
             </Grid>
             <Grid Grid.Column="1">
                 <ListView x:Name="lvFood" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"></WrapPanel>
@@ -133,25 +185,55 @@
                 </ListView>
             </Grid>
             <Grid Grid.Column="2">
-                <ListView x:Name="lvSelected">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Vertical"></WrapPanel>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Height="70" Width="210">
-                                <Image Source="{Binding ImagePath}" Style="{StaticResource SelectedImageStyle}" />
-                                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" >
-                                    <TextBlock Text="{Binding Name}" Style="{StaticResource SelectedNameStyle}" />
-                                    <TextBlock Text="{Binding TotalPrice}" Style="{StaticResource SelectedPriceStyle}" />
-                                    <TextBlock Text="{Binding Count}" Style="{StaticResource SelectedCountStyle}" />
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="150" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <ListView x:Name="lvSelected"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Vertical"></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="70" Width="210">
+                                    <Image Source="{Binding ImagePath}" Style="{StaticResource SelectedImageStyle}" />
+                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0">
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource SelectedNameStyle}" />
+                                        <TextBlock Text="{Binding TotalPrice}" Style="{StaticResource SelectedPriceStyle}" />
+                                        <TextBlock Text="{Binding Count}" Style="{StaticResource SelectedCountStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Border BorderBrush="#CED4DA" BorderThickness="1">
+                        <TextBlock x:Name="TotalPrice" Style="{StaticResource TotalPriceStyle}" />
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel HorizontalAlignment="Center">
+                        <ComboBox Style="{StaticResource PaymentStyle}">
+                            <ComboBoxItem>
+                                <TextBlock Text="CASH" Style="{StaticResource PaymentItemStyle}"/>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="CARD" Style="{StaticResource PaymentItemStyle}"/>
+                            </ComboBoxItem>
+                        </ComboBox>
+                        <Border>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="#CED4DA" />
+                            </Border.Effect>
+                            <Button Style="{StaticResource PaymentBtnStyle}" Click="PaymentBtn_Click"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
