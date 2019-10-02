@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mcdonald
+namespace Mcdonald.DataSource
 {
     public class CategoryDataSource
     {

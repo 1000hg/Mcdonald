@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mcdonald.DataSource;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -8,12 +9,10 @@ using System.Windows;
 
 namespace Mcdonald
 {
-    /// <summary>
-    /// App.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class App : Application
     {
         public static CategoryDataSource CategoryData = new CategoryDataSource();
-        public static FoodDataSorce FoodData = new FoodDataSorce();
+        public static FoodDataSource FoodData = new FoodDataSource();
+        public static SeatDataSource SeatData = new SeatDataSource();
     }
 }
