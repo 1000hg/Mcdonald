@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace Mcdonald
+namespace Mcdonald.DataSource
 {
-    public class FoodDataSorce
+    public class FoodDataSource
     {
         bool isLoaded = false;
 
