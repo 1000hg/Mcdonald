@@ -45,6 +45,12 @@ namespace Mcdonald.View
             MessageBox.Show(msg);
             OrderControl.Visibility = Visibility.Hidden;
             lvSeat.Visibility = Visibility.Visible;
+            UpdateListView(args.seatIdx);
+        }
+
+        private void UpdateListView(int idx)
+        {
+            
         }
 
         private void Ctrl_OnPaymentComplete(object sender, OrderArgs args)
