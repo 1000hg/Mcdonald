@@ -58,6 +58,7 @@
     <Compile Include="DataSource\FoodDataSource.cs" />
     <Compile Include="DataSource\CategoryDataSource.cs" />
     <Compile Include="DataSource\SeatDataSource.cs" />
+    <Compile Include="DataSource\StatisticsDataSource.cs" />
     <Compile Include="Manager\CategoryManager.cs" />
     <Compile Include="View\OrderCtrl.xaml.cs">
       <DependentUpon>OrderCtrl.xaml</DependentUpon>
