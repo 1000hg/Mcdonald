@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace LbMcdonald.Model
 {
-    class Statistics
+    public class Statistics
     {
-        public DateTime date { get; set; }
-        public List<Food> menuList { get; set; }
+        public DateTime Date { get; set; }
+        public List<Food> FoodList { get; set; }
     }
 }

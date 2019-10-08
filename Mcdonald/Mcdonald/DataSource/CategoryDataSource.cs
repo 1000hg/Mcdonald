@@ -17,14 +17,17 @@ namespace Mcdonald.DataSource
         {
             if (isLoaded) return;
 
-            lstCategory = new List<Category>()
+            if (lstCategory == null)
             {
-                new Category() { Title = "All Menu", ImagePath = "/Assets/CategoryImage/all.jpg"},
-                new Category() { Title = "Breakfast", ImagePath = "/Assets/CategoryImage/breakfast.jpg"},
-                new Category() { Title = "Burgers", ImagePath = "/Assets/CategoryImage/burger.jpg"},
-                new Category() { Title = "Drinks", ImagePath = "/Assets/CategoryImage/drink.jpg"},
-                new Category() { Title = "Side & Snack", ImagePath = "/Assets/CategoryImage/side.jpg"}
-            };
+                lstCategory = new List<Category>()
+                {
+                    new Category() { Title = "All Menu", ImagePath = "/Assets/CategoryImage/all.jpg"},
+                    new Category() { Title = "Breakfast", ImagePath = "/Assets/CategoryImage/breakfast.jpg"},
+                    new Category() { Title = "Burgers", ImagePath = "/Assets/CategoryImage/burger.jpg"},
+                    new Category() { Title = "Drinks", ImagePath = "/Assets/CategoryImage/drink.jpg"},
+                    new Category() { Title = "Side & Snack", ImagePath = "/Assets/CategoryImage/side.jpg"}
+                };
+            }
 
             isLoaded = true;
         }

@@ -133,6 +133,7 @@ namespace Mcdonald.View
 
         private void PaymentBtn_Click(object sender, RoutedEventArgs e)
         {
+            insertStatisticsData();
             deleteSeatData();
 
             OrderArgs args = new OrderArgs();
@@ -155,6 +156,11 @@ namespace Mcdonald.View
             {
                 OnOrderComplete(this, args);
             }
+        }
+
+        private void insertStatisticsData()
+        {
+            App.StatisticsData.lstStatistics.Add(new Statistics { Date = new DateTime(), FoodList = seat.FoodList });
         }
 
         private void insertSeatData()
