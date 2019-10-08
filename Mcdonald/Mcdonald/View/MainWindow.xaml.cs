@@ -16,14 +16,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Mcdonald.View
 {
     public partial class MainWindow : Window
     {
+        DispatcherTimer myTimer = new DispatcherTimer();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            myTimer.Interval = new TimeSpan(0, 0, 1);
+            myTimer.Tick += myTimer_Tick;
+            myTimer.Start();
+        }
+
+        void myTimer_Tick(object sender, EventArgs e)
+
+        {
+
+            txtTime.Text = DateTime.Now.ToString();
+
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

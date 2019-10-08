@@ -14,6 +14,7 @@
 
         <Grid Grid.Row="0">
             <Image Source="/Assets/Mcdonald_logo.jpg" Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" />
+            <TextBlock x:Name="txtTime" HorizontalAlignment="Right" Margin="377,33,10,35" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"   FontSize="24px" FontWeight="Bold" Width="373" />
         </Grid>
 
         <Grid Grid.Row="1" >
