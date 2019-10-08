@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Mcdonald.DataSource
 {
-    class StatisticsDataSource
+    public class StatisticsDataSource
     {
-        public List<Statistics> lstSeat = new List<Statistics>();
+        public List<Statistics> lstStatistics = new List<Statistics>();
     }
 }

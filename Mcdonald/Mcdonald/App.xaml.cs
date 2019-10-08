@@ -14,5 +14,6 @@ namespace Mcdonald
         public static CategoryDataSource CategoryData = new CategoryDataSource();
         public static FoodDataSource FoodData = new FoodDataSource();
         public static SeatDataSource SeatData = new SeatDataSource();
+        public static StatisticsDataSource StatisticsData = new StatisticsDataSource();
     }
 }
