@@ -21,6 +21,7 @@ namespace Mcdonald.View
     {
         public string seatId { get; set; }
     }
+
     public partial class SeatCtrl : UserControl
     {
         public SeatCtrl()
@@ -28,6 +29,7 @@ namespace Mcdonald.View
             InitializeComponent();
             this.Loaded += SeatCtrl_Loaded;
             OrderControl.OnOrderComplete += Ctrl_OnOrderComplete;
+            OrderControl.OnPaymentComplete += Ctrl_OnPaymentComplete;
         }
 
         private void SeatCtrl_Loaded(object sender, RoutedEventArgs e)
@@ -39,7 +41,15 @@ namespace Mcdonald.View
 
         private void Ctrl_OnOrderComplete(object sender, OrderArgs args)
         {
-            string msg = args.seatIdx + "번 테이블 주문완료";
+            string msg = "Table " + args.seatIdx + " Order completed";
+            MessageBox.Show(msg);
+            OrderControl.Visibility = Visibility.Hidden;
+            lvSeat.Visibility = Visibility.Visible;
+        }
+
+        private void Ctrl_OnPaymentComplete(object sender, OrderArgs args)
+        {
+            string msg = "Table " + args.seatIdx + "Payment completed";
             MessageBox.Show(msg);
             OrderControl.Visibility = Visibility.Hidden;
             lvSeat.Visibility = Visibility.Visible;

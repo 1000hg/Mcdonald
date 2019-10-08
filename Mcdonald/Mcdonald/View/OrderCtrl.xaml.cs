@@ -29,6 +29,9 @@ namespace Mcdonald.View
         public delegate void OrederCompleteHandler(object sender, OrderArgs args);
         public event OrederCompleteHandler OnOrderComplete;
 
+        public delegate void PaymentCompleteHandler(object sender, OrderArgs args);
+        public event PaymentCompleteHandler OnPaymentComplete;
+
         private CategoryManager categoryManager = new CategoryManager();
 
         private List<Food> foods = new List<Food>();
@@ -53,7 +56,7 @@ namespace Mcdonald.View
         public void setSeatIdx(int idx)
         {
             seat.Idx = idx;
-            SeatIdx.Text = idx.ToString() + "번 테이블";
+            SeatIdx.Text = "Table " + idx.ToString();
         }
 
         private void LvCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -130,6 +133,19 @@ namespace Mcdonald.View
 
         private void PaymentBtn_Click(object sender, RoutedEventArgs e)
         {
+            deleteSeatData();
+
+            OrderArgs args = new OrderArgs();
+            args.seatIdx = seat.Idx;
+
+            if (OnPaymentComplete != null)
+            {
+                OnPaymentComplete(this, args);
+            }
+        }
+
+        private void OrderBtn_Click(object sender, RoutedEventArgs e)
+        {
             insertSeatData();
 
             OrderArgs args = new OrderArgs();
@@ -144,6 +160,11 @@ namespace Mcdonald.View
         private void insertSeatData()
         {
             App.SeatData.lstSeat.Where(w => w.Idx == seat.Idx).ToList().ForEach(s => s = seat);
+        }
+
+        private void deleteSeatData()
+        {
+            App.SeatData.lstSeat.Where(w => w.Idx == seat.Idx).ToList().ForEach(s => App.SeatData.lstSeat.Remove(s));
         }
     }
 }
