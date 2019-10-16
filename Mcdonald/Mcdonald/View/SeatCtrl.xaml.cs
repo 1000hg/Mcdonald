@@ -24,6 +24,9 @@ namespace Mcdonald.View
 
     public partial class SeatCtrl : UserControl
     {
+
+        private List<SeatItemCtrl> seatItems = new List<SeatItemCtrl>();
+
         public SeatCtrl()
         {
             InitializeComponent();
@@ -35,8 +38,7 @@ namespace Mcdonald.View
         private void SeatCtrl_Loaded(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Seat_load");
-            App.SeatData.Load();
-            lvSeat.ItemsSource = App.SeatData.lstSeat;
+            LoadSeat();
         }
 
         private void Ctrl_OnOrderComplete(object sender, OrderArgs args)
@@ -45,12 +47,7 @@ namespace Mcdonald.View
             MessageBox.Show(msg);
             OrderControl.Visibility = Visibility.Hidden;
             lvSeat.Visibility = Visibility.Visible;
-            UpdateListView(args.seatIdx);
-        }
-
-        private void UpdateListView(int idx)
-        {
-            
+            UpdateSeat();
         }
 
         private void Ctrl_OnPaymentComplete(object sender, OrderArgs args)
@@ -63,9 +60,35 @@ namespace Mcdonald.View
 
         private void LvSeat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OrderControl.setSeatIdx((lvSeat.SelectedItem as Seat).Idx);
+            if(lvSeat.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            OrderControl.SetSeatIdx((lvSeat.SelectedItem as SeatItemCtrl).GetSeat().Idx);
             OrderControl.Visibility = Visibility.Visible;
             lvSeat.Visibility = Visibility.Hidden;
+        }
+
+        private void UpdateSeat()
+        {
+            LoadSeat();
+            lvSeat.Items.Refresh();
+        }
+
+        private void LoadSeat()
+        {
+            seatItems.Clear();
+
+            foreach (Seat seat in App.SeatData.lstSeat)
+            {
+                SeatItemCtrl seatItemCtrl = new SeatItemCtrl();
+                seatItemCtrl.SetSeat(seat);
+
+                seatItems.Add(seatItemCtrl);
+            }
+
+            lvSeat.ItemsSource = seatItems;
         }
     }
 }

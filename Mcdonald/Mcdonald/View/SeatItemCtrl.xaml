@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="Mcdonald.View.SeatCtrl"
+﻿<UserControl x:Class="Mcdonald.View.SeatItemCtrl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Mcdonald.View"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <Style x:Key="SeatTextStyle" TargetType="TextBlock" >
             <Setter Property="HorizontalAlignment" Value="Left" />
@@ -15,11 +16,16 @@
             <Setter Property="Width" Value="300px" />
             <Setter Property="Height" Value="300px" />
         </Style>
+        <Style x:Key="FoodTextStyle" TargetType="TextBlock" >
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
     </UserControl.Resources>
-    <Grid>
-        <local:OrderCtrl x:Name="OrderControl" Visibility="Hidden"/>
+
+    <StackPanel>
+        <TextBlock x:Name="SeatIdx" Style="{StaticResource SeatTextStyle}" />
         
-        <ListView x:Name="lvSeat" SelectionChanged="LvSeat_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" Visibility="Visible">
+        <ListView x:Name="lvFood" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" Visibility="Visible">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Background" Value="Transparent" />
@@ -34,9 +40,18 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                    <WrapPanel Orientation="Vertical"></WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource FoodTextStyle}" />
+                        <TextBlock Text="{Binding Count}" Style="{StaticResource FoodTextStyle}" />
+                        <TextBlock Text="{Binding TotalPrice}" Style="{StaticResource FoodTextStyle}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-    </Grid>
+    </StackPanel>
 </UserControl>

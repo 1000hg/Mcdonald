@@ -66,6 +66,9 @@
     <Compile Include="View\SeatCtrl.xaml.cs">
       <DependentUpon>SeatCtrl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SeatItemCtrl.xaml.cs">
+      <DependentUpon>SeatItemCtrl.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,6 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SeatCtrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SeatItemCtrl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

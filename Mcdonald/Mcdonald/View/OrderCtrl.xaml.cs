@@ -47,31 +47,51 @@ namespace Mcdonald.View
         private void OrderCtrl_Loaded(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Order_load");
-            App.CategoryData.Load();
-            App.FoodData.Load();
             lvCategory.ItemsSource = App.CategoryData.lstCategory;
-            lvFood.ItemsSource = App.FoodData.lstFood;
         }
 
-        public void setSeatIdx(int idx)
+        public void SetSeatIdx(int idx)
         {
-            seat.Idx = idx;
+            seat = App.SeatData.lstSeat[idx - 1];
+
+            UpdateSelectedFood();
+            SetFoodList();
+
             SeatIdx.Text = "Table " + idx.ToString();
+        }
+
+        private void SetFoodList()
+        {
+            List<Food> clone = new List<Food>(App.FoodData.lstFood.Count);
+
+            App.FoodData.lstFood.ForEach((food) =>
+            {
+                seat.FoodList.ForEach((selected) =>
+                {
+                    if (food.Name == selected.Name)
+                    {
+                        food.Count = selected.Count;
+                    }
+                });
+                clone.Add(new Food(food));
+            });
+
+            lvFood.ItemsSource = clone;
         }
 
         private void LvCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Category category = (lvCategory.SelectedItem as Category);
             if (category == null) return;
-            updateFood(category);
+            UpdateFood(category);
         }
 
-        private void updateFood(Category category)
+        private void UpdateFood(Category category)
         {
             foods.Clear();
             foreach (Food food in App.FoodData.lstFood)
             {
-                bool isSameCategory = checkCategory(food, category);
+                bool isSameCategory = CheckCategory(food, category);
                 if (isSameCategory)
                 {
                     foods.Add(food);
@@ -81,7 +101,7 @@ namespace Mcdonald.View
             lvFood.Items.Refresh();
         }
 
-        private bool checkCategory(Food food, Category category)
+        private bool CheckCategory(Food food, Category category)
         {
             return food.Category.Equals(categoryManager.getEnum(category.Title)) || categoryManager.getEnum(category.Title) == eCategory.None;
         }
@@ -91,18 +111,18 @@ namespace Mcdonald.View
             Button button = (sender as Button);
             Food food = button.DataContext as Food;
             if (food == null) return;
-            plusFood(food);
+            PlusFood(food);
             lvFood.Items.Refresh();
         }
 
-        private void plusFood(Food food)
+        private void PlusFood(Food food)
         {
             food.Count++;
             if (food.Count == 1)
             {
                 seat.FoodList.Add(food);
             }
-            updateSelectedFood();
+            UpdateSelectedFood();
         }
 
         private void BtnMinus_Click(object sender, RoutedEventArgs e)
@@ -121,10 +141,10 @@ namespace Mcdonald.View
             {
                 seat.FoodList.Remove(food);
             }
-            updateSelectedFood();
+            UpdateSelectedFood();
         }
 
-        private void updateSelectedFood()
+        private void UpdateSelectedFood()
         {
             lvSelected.ItemsSource = seat.FoodList;
             TotalPrice.Text = seat.TotalPrice.ToString();
@@ -133,8 +153,8 @@ namespace Mcdonald.View
 
         private void PaymentBtn_Click(object sender, RoutedEventArgs e)
         {
-            insertStatisticsData();
-            deleteSeatData();
+            InsertStatisticsData();
+            DeleteSeatData();
 
             OrderArgs args = new OrderArgs();
             args.seatIdx = seat.Idx;
@@ -147,7 +167,7 @@ namespace Mcdonald.View
 
         private void OrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            insertSeatData();
+            InsertSeatData();
 
             OrderArgs args = new OrderArgs();
             args.seatIdx = seat.Idx;
@@ -158,19 +178,27 @@ namespace Mcdonald.View
             }
         }
 
-        private void insertStatisticsData()
+        private void InsertStatisticsData()
         {
             App.StatisticsData.lstStatistics.Add(new Statistics { Date = new DateTime(), FoodList = seat.FoodList });
         }
 
-        private void insertSeatData()
+        private void InsertSeatData()
         {
-            App.SeatData.lstSeat.Where(w => w.Idx == seat.Idx).ToList().ForEach(s => s = seat);
+            App.SeatData.lstSeat
+                .Where(w => w.Idx == seat.Idx).ToList()
+                .ForEach(s =>
+                {
+                    int position = App.SeatData.lstSeat.IndexOf(s);
+                    App.SeatData.lstSeat[position] = seat;
+                });
         }
 
-        private void deleteSeatData()
+        private void DeleteSeatData()
         {
-            App.SeatData.lstSeat.Where(w => w.Idx == seat.Idx).ToList().ForEach(s => App.SeatData.lstSeat.Remove(s));
+            App.SeatData.lstSeat
+                .Where(w => w.Idx == seat.Idx).ToList()
+                .ForEach(s => App.SeatData.lstSeat.Remove(s));
         }
     }
 }

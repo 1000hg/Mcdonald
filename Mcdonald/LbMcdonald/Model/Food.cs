@@ -9,6 +9,21 @@ namespace LbMcdonald.Model
 {
     public class Food
     {
+        public Food()
+        {
+
+        }
+        
+        public Food(Food food)
+        {
+            this.Name = food.Name;
+            this.Price = food.Price;
+            this.Count = food.Count;
+            this.ImagePath = food.ImagePath;
+            this.Category = food.Category;
+            this.TotalPrice = food.TotalPrice;
+        }
+
         public String Name { get; set; }
         public int Price { get; set; }
 
