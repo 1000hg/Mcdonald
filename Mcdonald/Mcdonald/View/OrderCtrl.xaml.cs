@@ -54,6 +54,8 @@ namespace Mcdonald.View
         {
             seat = App.SeatData.lstSeat[idx - 1];
 
+            lvSelected.ItemsSource = seat.FoodList;
+
             UpdateSelectedFood();
             SetFoodList();
 
@@ -130,11 +132,11 @@ namespace Mcdonald.View
             Button button = (sender as Button);
             Food food = button.DataContext as Food;
             if (food == null) return;
-            minusFood(food);
+            MinusFood(food);
             lvFood.Items.Refresh();
         }
 
-        private void minusFood(Food food)
+        private void MinusFood(Food food)
         {
             food.Count--;
             if (food.Count == 0)
@@ -146,7 +148,7 @@ namespace Mcdonald.View
 
         private void UpdateSelectedFood()
         {
-            lvSelected.ItemsSource = seat.FoodList;
+            //lvSelected.Items.Clear();
             TotalPrice.Text = seat.TotalPrice.ToString();
             lvSelected.Items.Refresh();
         }
