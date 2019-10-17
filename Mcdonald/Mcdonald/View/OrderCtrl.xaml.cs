@@ -55,30 +55,33 @@ namespace Mcdonald.View
             seat = App.SeatData.lstSeat[idx - 1];
 
             lvSelected.ItemsSource = seat.FoodList;
+            lvFood.ItemsSource = GetFoodList();
 
             UpdateSelectedFood();
-            SetFoodList();
 
             SeatIdx.Text = "Table " + idx.ToString();
         }
 
-        private void SetFoodList()
+        private List<Food> GetFoodList()
         {
-            List<Food> clone = new List<Food>(App.FoodData.lstFood.Count);
+            List<Food> foods = new List<Food>();
 
             App.FoodData.lstFood.ForEach((food) =>
             {
+                Food tempFood = new Food(food);
+
                 seat.FoodList.ForEach((selected) =>
                 {
                     if (food.Name == selected.Name)
                     {
-                        food.Count = selected.Count;
+                        tempFood.Count = selected.Count;
                     }
                 });
-                clone.Add(new Food(food));
+
+                foods.Add(tempFood);
             });
 
-            lvFood.ItemsSource = clone;
+            return foods;
         }
 
         private void LvCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -91,7 +94,7 @@ namespace Mcdonald.View
         private void UpdateFood(Category category)
         {
             foods.Clear();
-            foreach (Food food in App.FoodData.lstFood)
+            foreach (Food food in GetFoodList())
             {
                 bool isSameCategory = CheckCategory(food, category);
                 if (isSameCategory)
@@ -120,10 +123,27 @@ namespace Mcdonald.View
         private void PlusFood(Food food)
         {
             food.Count++;
+
             if (food.Count == 1)
             {
-                seat.FoodList.Add(food);
+                Food tempFood = new Food(food);
+                seat.FoodList.Add(tempFood);
             }
+            else
+            {
+                int foodIdx = 0;
+
+                seat.FoodList.ForEach((item) =>
+                {
+                    if (food.Name.Equals(item.Name))
+                    {
+                        foodIdx = seat.FoodList.IndexOf(item);
+                    }
+                });
+
+                seat.FoodList[foodIdx].Count++;
+            }
+
             UpdateSelectedFood();
         }
 
@@ -139,16 +159,39 @@ namespace Mcdonald.View
         private void MinusFood(Food food)
         {
             food.Count--;
+
+            int foodIdx = 0;
+
+            seat.FoodList.ForEach((item) =>
+            {
+                if (food.Name.Equals(item.Name))
+                {
+                    foodIdx = seat.FoodList.IndexOf(item);
+                }
+            });
+
             if (food.Count == 0)
             {
-                seat.FoodList.Remove(food);
+                try
+                {
+                    seat.FoodList.RemoveAt(foodIdx);
+                }
+                catch (Exception e)
+                {
+                    Debug.Fail(e.Message);
+                    Debug.Print("Cannot be lowered to zero");
+                }
             }
+            else
+            {
+                seat.FoodList[foodIdx].Count--;
+            }
+
             UpdateSelectedFood();
         }
 
         private void UpdateSelectedFood()
         {
-            //lvSelected.Items.Clear();
             TotalPrice.Text = seat.TotalPrice.ToString();
             lvSelected.Items.Refresh();
         }
