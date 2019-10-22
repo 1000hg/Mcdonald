@@ -13,19 +13,17 @@
             <Setter Property="Margin" Value="10" />
             <Setter Property="FontSize" Value="25" />
             <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Width" Value="300px" />
-            <Setter Property="Height" Value="300px" />
         </Style>
         <Style x:Key="FoodTextStyle" TargetType="TextBlock" >
-            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontSize" Value="15" />
             <Setter Property="Margin" Value="10" />
         </Style>
     </UserControl.Resources>
 
-    <StackPanel>
+    <StackPanel Width="350" Height="350">
         <TextBlock x:Name="SeatIdx" Style="{StaticResource SeatTextStyle}" />
         
-        <ListView x:Name="lvFood" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" Visibility="Visible">
+        <ListView x:Name="lvFood" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" Visibility="Visible" BorderBrush="White">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Background" Value="Transparent" />

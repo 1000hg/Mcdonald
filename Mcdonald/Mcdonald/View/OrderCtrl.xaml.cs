@@ -178,7 +178,6 @@ namespace Mcdonald.View
                 }
                 catch (Exception e)
                 {
-                    Debug.Fail(e.Message);
                     Debug.Print("Cannot be lowered to zero");
                 }
             }

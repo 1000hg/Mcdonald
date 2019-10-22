@@ -6,6 +6,18 @@
         xmlns:local="clr-namespace:Mcdonald.View"
         mc:Ignorable="d"
         Title="MainWindow">
+    <Window.Resources>
+        <Style x:Key="MenuBtn" TargetType="Button">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
@@ -13,8 +25,12 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image Source="/Assets/Mcdonald_logo.jpg" Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" />
-            <TextBlock x:Name="txtTime" HorizontalAlignment="Right" Margin="377,33,10,35" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"   FontSize="24px" FontWeight="Bold" Width="373" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                <Image Source="/Assets/Mcdonald_logo.jpg" Width="70" VerticalAlignment="Center" Margin="40,0,0,0" />
+                <Button Style="{StaticResource MenuBtn}" Content="Order" Margin="80, 0, 0, 10"/>
+                <Button Style="{StaticResource MenuBtn}" Content="Statistic" Margin="30, 0, 0, 10"/>
+            </StackPanel>
+            <TextBlock x:Name="txtTime" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="24px" FontWeight="Bold" Width="373" />
         </Grid>
 
         <Grid Grid.Row="1" >
