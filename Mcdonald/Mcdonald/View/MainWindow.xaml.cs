@@ -46,5 +46,17 @@ namespace Mcdonald.View
         {
 
         }
+
+        private void Order_Click(object sender, RoutedEventArgs e)
+        {
+            SeatControl.Visibility = Visibility.Visible;
+            StatisticControl.Visibility = Visibility.Hidden;
+        }
+
+        private void Statistic_Click(object sender, RoutedEventArgs e)
+        {
+            SeatControl.Visibility = Visibility.Hidden;
+            StatisticControl.Visibility = Visibility.Visible;
+        }
     }
 }
