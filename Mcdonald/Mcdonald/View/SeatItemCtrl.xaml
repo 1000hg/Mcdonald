@@ -10,12 +10,12 @@
         <Style x:Key="SeatTextStyle" TargetType="TextBlock" >
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="FontSize" Value="25" />
+            <Setter Property="Margin" Value="20" />
+            <Setter Property="FontSize" Value="30" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
         <Style x:Key="FoodTextStyle" TargetType="TextBlock" >
-            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontSize" Value="12" />
             <Setter Property="Margin" Value="10" />
         </Style>
     </UserControl.Resources>

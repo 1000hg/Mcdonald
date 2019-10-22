@@ -30,12 +30,12 @@
                 <Button Style="{StaticResource MenuBtn}" Content="Order" Margin="80, 0, 0, 10"/>
                 <Button Style="{StaticResource MenuBtn}" Content="Statistic" Margin="30, 0, 0, 10"/>
             </StackPanel>
-            <TextBlock x:Name="txtTime" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="24px" FontWeight="Bold" Width="373" />
+            <TextBlock x:Name="txtTime" HorizontalAlignment="Right" Margin="0,0,30,0" TextWrapping="Wrap" VerticalAlignment="Center"  FontSize="20" />
         </Grid>
 
         <Grid Grid.Row="1" >
-            <local:SeatCtrl x:Name="SeatControl" Visibility="Hidden"/>
-            <local:StatisticCtrl x:Name="StatisticControl" />
+            <local:SeatCtrl x:Name="SeatControl" />
+            <local:StatisticCtrl x:Name="StatisticControl" Visibility="Hidden"/>
         </Grid>
     </Grid>
 </Window>
