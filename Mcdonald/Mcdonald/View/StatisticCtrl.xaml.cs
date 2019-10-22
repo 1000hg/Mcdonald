@@ -29,13 +29,10 @@ namespace Mcdonald.View
 
         List<Food> food = new List<Food>();
 
-        public class CategoryTotal
-        {
-            public int Price { get; set; }
 
-        }
+            public string PPrice { get; set; }
 
-        CategoryTotal categoryTotal = new CategoryTotal();
+
 
 
 
@@ -47,7 +44,10 @@ namespace Mcdonald.View
 
         private void StatisticCtrl_Loaded(object sender, RoutedEventArgs e)
         {
-            categoryTotalText.Text = "총합 :" + findCategoryTotal();
+
+            PPrice = "총합 : " + findCategoryTotal();
+            this.DataContext = PPrice;
+            //categoryTotalText.Text = "총합 :" + findCategoryTotal();
             this.DataContext = App.FoodData;
 
             App.FoodData.Load();
@@ -62,7 +62,7 @@ namespace Mcdonald.View
             Category category = (lvCategory.SelectedItem as Category);
             if (category == null) return;
             updateFood(category);
-            categoryTotalText.Text = "총합 : " + findCategoryTotal();
+            //categoryTotalText.Text = "총합 : " + findCategoryTotal();
         }
 
         private void updateFood(Category category)
@@ -124,8 +124,6 @@ namespace Mcdonald.View
             categoryTotalText.Text = "총합 : " + CategoryTotal.ToString();
             Debug.WriteLine("총합 : " + CategoryTotal.ToString());
             return CategoryTotal.ToString();
-
-
 
         }
 

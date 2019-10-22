@@ -7,17 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-
-            <Image Source="/Assets/Mcdonald_logo.jpg" Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" />
-        </Grid>
-
-        <Grid Grid.Row="1">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230" />
                 <ColumnDefinition Width="*" />
@@ -56,7 +47,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <Grid Grid.Row="1">
-                    <TextBlock Name ="categoryTotalText" FontSize="30" TextAlignment="Center" Margin="20,20,20,0"></TextBlock>
+                    <TextBlock Name ="categoryTotalText" Text="{Binding PPrice}" FontSize="30" TextAlignment="Center" Margin="20,20,20,0"></TextBlock>
                 </Grid>
             </Grid>
 
@@ -65,7 +56,7 @@
 
                 <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
 
-                    <ItemsControl ItemsSource="{Binding}" x:Name="foodChart" Grid.ColumnSpan="3">
+                    <ItemsControl x:Name="foodChart" Grid.ColumnSpan="3">
 
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -77,10 +68,10 @@
                             <DataTemplate>
                                 <StackPanel Margin="10,10,10,50" VerticalAlignment="Bottom" Width="80">
                                     <Border Name="br" Margin="3,10,3,10"  CornerRadius="5" 
-                                Background="Green"
-                                Width="20" BorderBrush="White"  
-                                BorderThickness="3" 
-                                Height="{Binding Ratio}">
+                                            Background="Green"
+                                            Width="20" BorderBrush="White"  
+                                            BorderThickness="3" 
+                                            Height="{Binding Ratio}">
                                     </Border>
 
                                     <TextBlock HorizontalAlignment="Center" FontWeight="Bold" 
