@@ -242,7 +242,11 @@ namespace Mcdonald.View
         {
             App.SeatData.lstSeat
                 .Where(w => w.Idx == seat.Idx).ToList()
-                .ForEach(s => App.SeatData.lstSeat.Remove(s));
+                .ForEach(s =>
+                {
+                    int position = App.SeatData.lstSeat.IndexOf(s);
+                    App.SeatData.lstSeat[position] = new Seat() { Idx = s.Idx };
+                });
         }
     }
 }

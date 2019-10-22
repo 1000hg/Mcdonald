@@ -39,12 +39,24 @@ namespace Mcdonald.View
 
         void myTimer_Tick(object sender, EventArgs e)
         {
-            txtTime.Text = DateTime.Now.ToString();
+            txtTime.Text = DateTime.Now.ToShortDateString();
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void Order_Click(object sender, RoutedEventArgs e)
+        {
+            SeatControl.Visibility = Visibility.Visible;
+            StatisticControl.Visibility = Visibility.Hidden;
+        }
+
+        private void Statistic_Click(object sender, RoutedEventArgs e)
+        {
+            SeatControl.Visibility = Visibility.Hidden;
+            StatisticControl.Visibility = Visibility.Visible;
         }
     }
 }

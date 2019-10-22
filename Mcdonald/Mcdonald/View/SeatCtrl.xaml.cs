@@ -56,6 +56,7 @@ namespace Mcdonald.View
             MessageBox.Show(msg);
             OrderControl.Visibility = Visibility.Hidden;
             lvSeat.Visibility = Visibility.Visible;
+            UpdateSeat();
         }
 
         private void LvSeat_SelectionChanged(object sender, SelectionChangedEventArgs e)
