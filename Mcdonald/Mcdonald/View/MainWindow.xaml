@@ -34,7 +34,8 @@
         </Grid>
 
         <Grid Grid.Row="1" >
-            <local:SeatCtrl x:Name="SeatControl" />
+            <local:SeatCtrl x:Name="SeatControl" Visibility="Hidden"/>
+            <local:StatisticCtrl x:Name="StatisticControl" />
         </Grid>
     </Grid>
 </Window>

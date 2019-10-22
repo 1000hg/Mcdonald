@@ -39,9 +39,7 @@ namespace Mcdonald.View
 
         void myTimer_Tick(object sender, EventArgs e)
         {
-
             txtTime.Text = DateTime.Now.ToString();
-
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
