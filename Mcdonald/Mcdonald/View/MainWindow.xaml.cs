@@ -28,10 +28,6 @@ namespace Mcdonald.View
         {
             InitializeComponent();
 
-            App.CategoryData.Load();
-            App.FoodData.Load();
-            App.SeatData.Load();
-
             myTimer.Interval = new TimeSpan(0, 0, 1);
             myTimer.Tick += myTimer_Tick;
             myTimer.Start();
@@ -39,12 +35,12 @@ namespace Mcdonald.View
 
         void myTimer_Tick(object sender, EventArgs e)
         {
-            txtTime.Text = DateTime.Now.ToShortDateString();
+            txtTime.Text = DateTime.Now.ToString();
         }
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Logo_Click(object sender, MouseButtonEventArgs e)
         {
-
+            
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)

@@ -26,9 +26,9 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                <Image Source="/Assets/Mcdonald_logo.jpg" Width="70" VerticalAlignment="Center" Margin="40,0,0,0" />
-                <Button Style="{StaticResource MenuBtn}" Content="Order" Margin="80, 0, 0, 10"/>
-                <Button Style="{StaticResource MenuBtn}" Content="Statistic" Margin="30, 0, 0, 10"/>
+                <Image Source="/Assets/Mcdonald_logo.jpg" Width="70" VerticalAlignment="Center" Margin="40,0,0,0" MouseLeftButtonDown="Logo_Click"/>
+                <Button Style="{StaticResource MenuBtn}" Content="Order" Margin="80, 0, 0, 10" Click="Order_Click"/>
+                <Button Style="{StaticResource MenuBtn}" Content="Statistic" Margin="30, 0, 0, 10" Click="Statistic_Click"/>
             </StackPanel>
             <TextBlock x:Name="txtTime" HorizontalAlignment="Right" Margin="0,0,30,0" TextWrapping="Wrap" VerticalAlignment="Center"  FontSize="20" />
         </Grid>
@@ -37,5 +37,7 @@
             <local:SeatCtrl x:Name="SeatControl" />
             <local:StatisticCtrl x:Name="StatisticControl" Visibility="Hidden"/>
         </Grid>
+
+        <local:LoadingCtrl x:Name="LoadingControl" Grid.RowSpan="2"/>
     </Grid>
 </Window>
