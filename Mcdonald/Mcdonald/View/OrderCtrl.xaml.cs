@@ -197,6 +197,21 @@ namespace Mcdonald.View
 
         private void PaymentBtn_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Would you like to pay? ", "Payment", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    PaymentEvent();
+                    break;
+                case MessageBoxResult.No:
+                    return;
+                case MessageBoxResult.Cancel:
+                    return;
+            }
+        }
+
+        private void PaymentEvent()
+        {
             InsertStatisticsData();
             DeleteSeatData();
 
