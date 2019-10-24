@@ -56,6 +56,8 @@ namespace Mcdonald.View
 
             Category category = App.CategoryData.lstCategory.Find(x => x.Title == "All Menu");
             StatisticControl.updateFood(category);
+            StatisticControl.findCategoryTotal();
+
         }
     }
 }

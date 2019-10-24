@@ -236,7 +236,7 @@ namespace Mcdonald.View
                     {
                         if (food.Name.Equals(payingFood.Name))
                         {
-                            food.TotalPrice = payingFood.Count * payingFood.Price;
+                            food.StatisticTotal = payingFood.Count * payingFood.Price;
 
                         }
                     }
@@ -249,9 +249,9 @@ namespace Mcdonald.View
             int maxPrice = 0;
             foreach (Food food in App.FoodData.lstFood)
             {
-                if (maxPrice < food.TotalPrice)
+                if (maxPrice < food.StatisticTotal)
                 {
-                    maxPrice = food.TotalPrice;
+                    maxPrice = food.StatisticTotal;
                 }
             }
 
@@ -264,7 +264,7 @@ namespace Mcdonald.View
 
             foreach (Food food in App.FoodData.lstFood)
             {
-                food.Ratio = ((float)food.TotalPrice / totalMaxPrice * 350) + 10;
+                food.Ratio = ((float)food.StatisticTotal / totalMaxPrice * 350);
             }
 
         }

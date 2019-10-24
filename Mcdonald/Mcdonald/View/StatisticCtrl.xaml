@@ -83,7 +83,7 @@
                                     </Border>
 
                                     <TextBlock HorizontalAlignment="Center" FontWeight="Bold" 
-                                                Text="{Binding TotalPrice}">
+                                                Text="{Binding StatisticTotal}">
                                         
                                         <TextBlock.RenderTransform>
                                             <TranslateTransform Y="-30"/>

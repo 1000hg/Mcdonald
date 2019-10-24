@@ -88,7 +88,7 @@ namespace Mcdonald.View
         }
 
 
-        private string findCategoryTotal()
+        public string findCategoryTotal()
         {
             int CategoryTotal = 0;
 
@@ -100,7 +100,7 @@ namespace Mcdonald.View
                     bool isSameCategory = checkCategory(food, category);
                     if (isSameCategory)
                     {
-                        CategoryTotal += food.TotalPrice;
+                        CategoryTotal += food.StatisticTotal;
                     }
                 }
             }
