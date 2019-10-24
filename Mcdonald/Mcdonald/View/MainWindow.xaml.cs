@@ -53,6 +53,9 @@ namespace Mcdonald.View
         {
             SeatControl.Visibility = Visibility.Hidden;
             StatisticControl.Visibility = Visibility.Visible;
+
+            Category category = App.CategoryData.lstCategory.Find(x => x.Title == "All Menu");
+            StatisticControl.updateFood(category);
         }
     }
 }

@@ -46,6 +46,7 @@ namespace LbMcdonald.Model
         }
         public String ImagePath { get; set; }
         public eCategory Category { get; set; }
+
         public int TotalPrice
         {
             get
@@ -57,5 +58,7 @@ namespace LbMcdonald.Model
                 return;
             }
         }
+
+        public float Ratio { get; set; }
     }
 }

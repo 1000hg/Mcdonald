@@ -7,19 +7,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-
         <Grid>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
+                
                 <ListView x:Name="lvCategory" SelectionChanged="LvCategory_SelectionChanged"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="0"
                           BorderThickness="0, 1, 0, 1">
+                    
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
                             <Setter Property="Background" Value="Transparent" />
@@ -32,11 +35,13 @@
                             </Setter>
                         </Style>
                     </ListView.ItemContainerStyle>
+                    
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Vertical"></WrapPanel>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
+                    
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="50" Width="210">
@@ -45,10 +50,13 @@
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    
                 </ListView>
+                
                 <Grid Grid.Row="1">
-                    <TextBlock Name ="categoryTotalText" Text="{Binding PPrice}" FontSize="30" TextAlignment="Center" Margin="20,20,20,0"></TextBlock>
+                    <TextBlock Name ="categoryTotalText" FontSize="30" TextAlignment="Center" Margin="20,20,20,0"></TextBlock>
                 </Grid>
+                
             </Grid>
 
             <Grid Grid.Column="1">
@@ -75,24 +83,31 @@
                                     </Border>
 
                                     <TextBlock HorizontalAlignment="Center" FontWeight="Bold" 
-                                   Text="{Binding TotalPrice}">
+                                                Text="{Binding TotalPrice}">
+                                        
                                         <TextBlock.RenderTransform>
                                             <TranslateTransform Y="-30"/>
                                         </TextBlock.RenderTransform>
+                                        
                                     </TextBlock>
 
                                     <TextBlock HorizontalAlignment="Center"
-                                   FontWeight="Bold"
-                                   Text="{Binding Name}" TextWrapping="Wrap" Height="60">
+                                               FontWeight="Bold"
+                                               Text="{Binding Name}" TextWrapping="Wrap" Height="60">
+
                                         <TextBlock.RenderTransform>
                                             <TranslateTransform Y="-20"/>
                                         </TextBlock.RenderTransform>
                                     </TextBlock>
+
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
+                        
                     </ItemsControl>
+                    
                 </ScrollViewer>
+                
             </Grid>
         </Grid>
     </Grid>

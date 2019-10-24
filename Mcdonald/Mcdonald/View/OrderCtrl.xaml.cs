@@ -213,6 +213,8 @@ namespace Mcdonald.View
         private void PaymentEvent()
         {
             InsertStatisticsData();
+            UpdateFoodDataTotalPrice();
+            findFoodRatio();
             DeleteSeatData();
 
             OrderArgs args = new OrderArgs();
@@ -222,6 +224,49 @@ namespace Mcdonald.View
             {
                 OnPaymentComplete(this, args);
             }
+        }
+
+        private void UpdateFoodDataTotalPrice()
+        {
+            foreach (Statistics statistics in App.StatisticsData.lstStatistics)
+            {
+                foreach (Food payingFood in statistics.FoodList)
+                {
+                    foreach (Food food in App.FoodData.lstFood)
+                    {
+                        if (food.Name.Equals(payingFood.Name))
+                        {
+                            food.TotalPrice = payingFood.Count * payingFood.Price;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        private int findMaxTotalPrice()
+        {
+            int maxPrice = 0;
+            foreach (Food food in App.FoodData.lstFood)
+            {
+                if (maxPrice < food.TotalPrice)
+                {
+                    maxPrice = food.TotalPrice;
+                }
+            }
+
+            return maxPrice;
+        }
+
+        private void findFoodRatio()
+        {
+            int totalMaxPrice = findMaxTotalPrice();
+
+            foreach (Food food in App.FoodData.lstFood)
+            {
+                food.Ratio = ((float)food.TotalPrice / totalMaxPrice * 350) + 10;
+            }
+
         }
 
         private void OrderBtn_Click(object sender, RoutedEventArgs e)

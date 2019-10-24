@@ -21,17 +21,18 @@ namespace Mcdonald.View
     /// <summary>
     /// Interaction logic for StatisticCtrl.xaml
     /// </summary>
+    /// 
+
+
     public partial class StatisticCtrl : UserControl
     {
         private CategoryManager categoryManager = new CategoryManager();
 
         private List<Food> foods = new List<Food>();
 
-        List<Food> food = new List<Food>();
+        private List<Statistics> statistics = new List<Statistics>();
 
-
-            public string PPrice { get; set; }
-
+        private Food food = new Food();
 
 
 
@@ -39,33 +40,34 @@ namespace Mcdonald.View
         public StatisticCtrl()
         {
             InitializeComponent();
-            this.Loaded += StatisticCtrl_Loaded; ;
+
+            this.Loaded += StatisticCtrl_Loaded;
         }
 
         private void StatisticCtrl_Loaded(object sender, RoutedEventArgs e)
         {
-
-            PPrice = "총합 : " + findCategoryTotal();
-            this.DataContext = PPrice;
-            //categoryTotalText.Text = "총합 :" + findCategoryTotal();
             this.DataContext = App.FoodData;
-
-            App.FoodData.Load();
-            foodChart.ItemsSource = App.FoodData.lstFood;
 
             App.CategoryData.Load();
             lvCategory.ItemsSource = App.CategoryData.lstCategory;
+
+            lvCategory.SelectedIndex = 0;
         }
+
+
 
         private void LvCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if(lvCategory.SelectedIndex == -1)
+                return;
+
             Category category = (lvCategory.SelectedItem as Category);
             if (category == null) return;
             updateFood(category);
-            //categoryTotalText.Text = "총합 : " + findCategoryTotal();
+            categoryTotalText.Text = "총합 : " + findCategoryTotal();
         }
 
-        private void updateFood(Category category)
+        public void updateFood(Category category)
         {
             foods.Clear();
             foreach (Food food in App.FoodData.lstFood)
@@ -86,65 +88,27 @@ namespace Mcdonald.View
         }
 
 
-        /*private int findMaxPrice()
-        {
-            int maxPrice = 0;
-            foreach (Food food in App.FoodData.lstFood)
-            {
-                if (maxPrice < food.Price)
-                {
-                    maxPrice = food.Price;
-                }
-            }
-
-            return maxPrice;
-        }*/
-
         private string findCategoryTotal()
         {
-
             int CategoryTotal = 0;
 
             Category category = (lvCategory.SelectedItem as Category);
 
-            if (category == null)
-            {
-                return "9";
-            }
-
             foreach (Food food in App.FoodData.lstFood)
             {
-                bool isSameCategory = checkCategory(food, category);
-                if (isSameCategory)
                 {
-                    CategoryTotal += food.TotalPrice;
+                    bool isSameCategory = checkCategory(food, category);
+                    if (isSameCategory)
+                    {
+                        CategoryTotal += food.TotalPrice;
+                    }
                 }
-
             }
             categoryTotalText.Text = "총합 : " + CategoryTotal.ToString();
             Debug.WriteLine("총합 : " + CategoryTotal.ToString());
             return CategoryTotal.ToString();
 
         }
-
-
-
-        /*public void Button_Click(object sender, RoutedEventArgs e)
-        {
-            foods.Clear();
-            int totalMaxPrice = findMaxPrice();
-
-            foreach (Food food in App.FoodData.lstFood)
-            {
-                food.Ratio = ((float)food.Price / totalMaxPrice * 350) + 10;
-
-                Debug.WriteLine(food.Ratio);
-                foods.Add(food);
-            }
-
-            foodChart.ItemsSource = foods;
-            foodChart.Items.Refresh();
-        }*/
 
     }
 }
