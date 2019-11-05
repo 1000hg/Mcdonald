@@ -52,7 +52,7 @@ namespace Mcdonald.View
 
         private void Ctrl_OnPaymentComplete(object sender, OrderArgs args)
         {
-            string msg = "Table " + args.seatIdx + "Payment completed";
+            string msg = "Table " + args.seatIdx + " Payment completed";
             MessageBox.Show(msg);
             OrderControl.Visibility = Visibility.Hidden;
             lvSeat.Visibility = Visibility.Visible;

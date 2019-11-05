@@ -286,7 +286,7 @@ namespace Mcdonald.View
 
         private void InsertStatisticsData()
         {
-            App.StatisticsData.lstStatistics.Add(new Statistics { Date = new DateTime(), FoodList = seat.FoodList });
+            App.StatisticsData.lstStatistics.Add(new Statistics { Date = System.DateTime.Now, FoodList = seat.FoodList });
         }
 
         private void InsertSeatData()
