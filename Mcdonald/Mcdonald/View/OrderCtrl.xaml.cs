@@ -158,6 +158,8 @@ namespace Mcdonald.View
 
         private void MinusFood(Food food)
         {
+            if (food.Count == 0) return;
+
             food.Count--;
 
             int foodIdx = 0;
