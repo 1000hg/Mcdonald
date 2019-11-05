@@ -18,6 +18,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
                 
                 <ListView x:Name="lvCategory" SelectionChanged="LvCategory_SelectionChanged"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="0"
@@ -56,10 +57,14 @@
                 <Grid Grid.Row="1">
                     <TextBlock Name ="categoryTotalText" FontSize="30" TextAlignment="Center" Margin="20,20,20,0"></TextBlock>
                 </Grid>
+
+              <Grid Grid.Row="2">
+                    <Button Content="시간별" Click="changeTotal" BorderThickness="0, 1, 0, 0" Name="totalChange"></Button>
+              </Grid>
                 
             </Grid>
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Visibility="Visible" x:Name="graph">
                 <Border BorderBrush="Gray" BorderThickness="1"></Border>
 
                 <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
@@ -109,6 +114,37 @@
                 </ScrollViewer>
                 
             </Grid>
+
+            <Grid Grid.Column="1" Visibility="Hidden" x:Name="time">
+                <Border BorderBrush="Gray" BorderThickness="1"></Border>
+                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+
+                    <ItemsControl x:Name="dayTotal" Grid.ColumnSpan="3">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"></StackPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="10,10,10,50" Width="100">
+                                    <Image Source="{Binding ImagePath}"  />
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                    <TextBlock Text="{Binding Count}"></TextBlock>
+                                    <TextBlock Text="{Binding TotalPrice}"></TextBlock>
+                                    <TextBlock Text="{Binding Date}"></TextBlock>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+
+                </ScrollViewer>
+            </Grid>
+            
         </Grid>
     </Grid>
 </UserControl>

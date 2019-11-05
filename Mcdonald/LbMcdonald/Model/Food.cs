@@ -62,5 +62,7 @@ namespace LbMcdonald.Model
         public int StatisticTotal { get; set; }
 
         public float Ratio { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

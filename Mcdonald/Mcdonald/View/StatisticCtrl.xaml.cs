@@ -30,9 +30,6 @@ namespace Mcdonald.View
 
         private List<Food> foods = new List<Food>();
 
-        private List<Statistics> statistics = new List<Statistics>();
-
-        private Food food = new Food();
 
 
 
@@ -108,6 +105,39 @@ namespace Mcdonald.View
             Debug.WriteLine("총합 : " + CategoryTotal.ToString());
             return CategoryTotal.ToString();
 
+        }
+
+        private void changeTotal(object sender, RoutedEventArgs e)
+        {
+            if (graph.Visibility == Visibility.Visible)
+            {
+                graph.Visibility = Visibility.Hidden;
+                time.Visibility = Visibility.Visible;
+                totalChange.Content = "그래프";
+            }
+            else
+            {
+                graph.Visibility = Visibility.Visible;
+                time.Visibility = Visibility.Hidden;
+                totalChange.Content = "시간별";
+            }
+        }
+
+        public void UpdateDayTotal()
+        {
+            foods.Clear();
+            foreach(Statistics statistics in App.StatisticsData.lstStatistics)
+            {
+                foreach(Food food in statistics.FoodList)
+                {
+                    food.Date = statistics.Date;
+                    foods.Add(food);
+                }
+
+            }
+
+            dayTotal.ItemsSource = foods;
+            dayTotal.Items.Refresh();
         }
 
     }
