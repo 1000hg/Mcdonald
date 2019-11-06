@@ -26,6 +26,9 @@ namespace Mcdonald.View
 
     public partial class OrderCtrl : UserControl
     {
+        public delegate void OrederBackHandler(object sender);
+        public event OrederBackHandler OnOrderBack;
+
         public delegate void OrederCompleteHandler(object sender, OrderArgs args);
         public event OrederCompleteHandler OnOrderComplete;
 
@@ -174,14 +177,7 @@ namespace Mcdonald.View
 
             if (food.Count == 0)
             {
-                try
-                {
-                    seat.FoodList.RemoveAt(foodIdx);
-                }
-                catch (Exception e)
-                {
-                    Debug.Print("Cannot be lowered to zero");
-                }
+                seat.FoodList.RemoveAt(foodIdx);
             }
             else
             {
@@ -197,9 +193,28 @@ namespace Mcdonald.View
             lvSelected.Items.Refresh();
         }
 
+        private void Back_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (OnOrderBack != null)
+            {
+                OnOrderBack(this);
+            }
+        }
+
+        private void Clear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            seat.FoodList.Clear();
+
+            lvFood.ItemsSource = GetFoodList();
+
+            UpdateSelectedFood();
+        }
+
         private void PaymentBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Would you like to pay? ", "Payment", MessageBoxButton.YesNoCancel);
+            if (CheckFoodEmpty()) return;
+
+            MessageBoxResult result = MessageBox.Show("Total Price : " + seat.TotalPrice + "\nWould you like to pay? ", "Payment", MessageBoxButton.YesNoCancel);
             switch (result)
             {
                 case MessageBoxResult.Yes:
@@ -216,7 +231,7 @@ namespace Mcdonald.View
         {
             InsertStatisticsData();
             UpdateFoodDataTotalPrice();
-            findFoodRatio();
+            FindFoodRatio();
             DeleteSeatData();
 
             OrderArgs args = new OrderArgs();
@@ -246,7 +261,7 @@ namespace Mcdonald.View
             }
         }
 
-        private int findMaxTotalPrice()
+        private int FindMaxTotalPrice()
         {
             int maxPrice = 0;
             foreach (Food food in App.FoodData.lstFood)
@@ -260,9 +275,9 @@ namespace Mcdonald.View
             return maxPrice;
         }
 
-        private void findFoodRatio()
+        private void FindFoodRatio()
         {
-            int totalMaxPrice = findMaxTotalPrice();
+            int totalMaxPrice = FindMaxTotalPrice();
 
             foreach (Food food in App.FoodData.lstFood)
             {
@@ -273,6 +288,8 @@ namespace Mcdonald.View
 
         private void OrderBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (CheckFoodEmpty()) return;
+
             InsertSeatData();
 
             OrderArgs args = new OrderArgs();
@@ -282,6 +299,17 @@ namespace Mcdonald.View
             {
                 OnOrderComplete(this, args);
             }
+        }
+
+        private bool CheckFoodEmpty()
+        {
+            if (seat.FoodList.Count == 0)
+            {
+                string msg = "Please Add Food";
+                MessageBox.Show(msg);
+                return true;
+            }
+            return false;
         }
 
         private void InsertStatisticsData()

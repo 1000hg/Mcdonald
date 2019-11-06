@@ -31,6 +31,7 @@ namespace Mcdonald.View
         {
             InitializeComponent();
             this.Loaded += SeatCtrl_Loaded;
+            OrderControl.OnOrderBack += Ctrl_OnOrderBack;
             OrderControl.OnOrderComplete += Ctrl_OnOrderComplete;
             OrderControl.OnPaymentComplete += Ctrl_OnPaymentComplete;
         }
@@ -39,6 +40,13 @@ namespace Mcdonald.View
         {
             Debug.WriteLine("Seat_load");
             LoadSeat();
+        }
+
+        private void Ctrl_OnOrderBack(object sender)
+        {
+            OrderControl.Visibility = Visibility.Hidden;
+            lvSeat.Visibility = Visibility.Visible;
+            UpdateSeat();
         }
 
         private void Ctrl_OnOrderComplete(object sender, OrderArgs args)

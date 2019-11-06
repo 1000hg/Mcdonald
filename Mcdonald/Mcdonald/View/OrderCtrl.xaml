@@ -114,33 +114,42 @@
             <ColumnDefinition Width="230" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <ListView x:Name="lvCategory" SelectionChanged="LvCategory_SelectionChanged"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                    <ContentPresenter />
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical"></WrapPanel>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="50" Width="210">
-                            <Image Source="{Binding ImagePath}" Style="{StaticResource CategoryImageStyle}" />
-                            <TextBlock Text="{Binding Title}" Style="{StaticResource CategoryTitleStyle}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#EEEEEE" MouseLeftButtonDown="Back_MouseLeftButtonDown" >
+                <TextBlock Text="Back" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ListView x:Name="lvCategory" SelectionChanged="LvCategory_SelectionChanged"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="50" Width="210">
+                                <Image Source="{Binding ImagePath}" Style="{StaticResource CategoryImageStyle}" />
+                                <TextBlock Text="{Binding Title}" Style="{StaticResource CategoryTitleStyle}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </Grid>
         <Grid Grid.Column="1">
             <ListView x:Name="lvFood" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
@@ -191,6 +200,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="150" />
             </Grid.RowDefinitions>
@@ -220,12 +230,15 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" Background="#EEEEEE" MouseLeftButtonDown="Clear_MouseLeftButtonDown" >
+                <TextBlock Text="Clear" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
+            </Grid>
+            <Grid Grid.Row="3">
                 <Border BorderBrush="#CED4DA" BorderThickness="1">
                     <TextBlock x:Name="TotalPrice" Style="{StaticResource TotalPriceStyle}" />
                 </Border>
             </Grid>
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="4">
                 <StackPanel HorizontalAlignment="Center">
                     <ComboBox Style="{StaticResource PaymentStyle}">
                         <ComboBoxItem>
