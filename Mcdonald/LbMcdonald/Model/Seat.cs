@@ -9,6 +9,24 @@ namespace LbMcdonald.Model
 { 
     public class Seat
     {
+
+        public Seat()
+        {
+
+        }
+
+        public Seat(Seat seat)
+        {
+            this.Idx = seat.Idx;
+            this.Payment = seat.Payment;
+            seat.FoodList.ForEach((food) =>
+            {
+                Food tempFood = new Food(food);
+                this.FoodList.Add(tempFood);
+            });
+            this.TotalPrice = seat.TotalPrice;
+        }
+
         public int Idx { get; set; }
 
         private List<Food> foodList = new List<Food>();

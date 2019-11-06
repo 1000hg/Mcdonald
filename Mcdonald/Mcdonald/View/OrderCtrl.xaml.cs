@@ -55,7 +55,7 @@ namespace Mcdonald.View
 
         public void SetSeatIdx(int idx)
         {
-            seat = App.SeatData.lstSeat[idx - 1];
+            seat = new Seat(App.SeatData.lstSeat[idx - 1]);
 
             lvSelected.ItemsSource = seat.FoodList;
             lvFood.ItemsSource = GetFoodList();

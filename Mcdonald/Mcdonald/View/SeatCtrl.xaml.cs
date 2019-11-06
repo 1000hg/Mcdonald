@@ -69,10 +69,7 @@ namespace Mcdonald.View
 
         private void LvSeat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(lvSeat.SelectedIndex == -1)
-            {
-                return;
-            }
+            if(lvSeat.SelectedIndex == -1) return; 
 
             OrderControl.SetSeatIdx((lvSeat.SelectedItem as SeatItemCtrl).GetSeat().Idx);
             OrderControl.Visibility = Visibility.Visible;
