@@ -24,6 +24,8 @@ namespace Mcdonald.View
     {
         DispatcherTimer myTimer = new DispatcherTimer();
 
+        Client client = new Client();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +33,34 @@ namespace Mcdonald.View
             myTimer.Interval = new TimeSpan(0, 0, 1);
             myTimer.Tick += myTimer_Tick;
             myTimer.Start();
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (client.ConnectServer())
+            {
+                client.SendMessage("@2207");
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("서버가 연결되지 않았습니다. 다시 연결할까요? ", "Reload", MessageBoxButton.YesNoCancel);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                      if (client.ConnectServer())
+                      {
+                         client.SendMessage("@2207");
+                      }
+                      break;
+                    case MessageBoxResult.No:
+                        //종료
+                        return;
+                    case MessageBoxResult.Cancel:
+                        //종료
+                        return;
+                }
+            }
         }
 
         void myTimer_Tick(object sender, EventArgs e)
@@ -40,7 +70,7 @@ namespace Mcdonald.View
 
         private void Logo_Click(object sender, MouseButtonEventArgs e)
         {
-            
+
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)
@@ -58,6 +88,31 @@ namespace Mcdonald.View
             StatisticControl.updateFood(category);
             StatisticControl.findCategoryTotal();
             StatisticControl.UpdateDayTotal();
+
+            if (client.IsConnected)
+            {
+                client.SendMessage("@All#" + StatisticControl.findCategoryTotal());
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("서버가 연결되지 않았습니다. 다시 연결할까요? ", "Reload", MessageBoxButton.YesNoCancel);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                      if (client.ConnectServer())
+                      {
+                         client.SendMessage("@2207");
+                         client.SendMessage("@All#" + StatisticControl.findCategoryTotal());
+                      }
+                      break;
+                    case MessageBoxResult.No:
+                        //종료
+                        return;
+                    case MessageBoxResult.Cancel:
+                        //종료
+                        return;
+                }
+            }
 
         }
     }

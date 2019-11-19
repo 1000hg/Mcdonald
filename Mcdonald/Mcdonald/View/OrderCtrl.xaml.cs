@@ -39,6 +39,8 @@ namespace Mcdonald.View
 
         private List<Food> foods = new List<Food>();
 
+        Client client = new Client();
+
         private Seat seat = new Seat();
 
         public OrderCtrl()
@@ -229,6 +231,31 @@ namespace Mcdonald.View
 
         private void PaymentEvent()
         {
+            if (client.ConnectServer())
+            {
+                client.SendMessage("@2207#" + seat.TotalPrice.ToString());
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("서버가 연결되지 않았습니다. 다시 연결할까요? ", "Reload", MessageBoxButton.YesNoCancel);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        if (client.ConnectServer())
+                        {
+                            client.SendMessage("@2207");
+                            client.SendMessage("@2207#" + seat.TotalPrice.ToString());
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        //종료
+                        return;
+                    case MessageBoxResult.Cancel:
+                        //종료
+                        return;
+                }
+            }
+
             InsertStatisticsData();
             UpdateFoodDataTotalPrice();
             FindFoodRatio();

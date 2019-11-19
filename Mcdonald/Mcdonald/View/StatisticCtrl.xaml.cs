@@ -33,7 +33,6 @@ namespace Mcdonald.View
 
 
 
-
         public StatisticCtrl()
         {
             InitializeComponent();
@@ -49,6 +48,7 @@ namespace Mcdonald.View
             lvCategory.ItemsSource = App.CategoryData.lstCategory;
 
             lvCategory.SelectedIndex = 0;
+
         }
 
 
@@ -107,6 +107,7 @@ namespace Mcdonald.View
 
         }
 
+
         private void changeTotal(object sender, RoutedEventArgs e)
         {
             if (graph.Visibility == Visibility.Visible)
@@ -126,6 +127,7 @@ namespace Mcdonald.View
         public void UpdateDayTotal()
         {
             foods.Clear();
+
             foreach(Statistics statistics in App.StatisticsData.lstStatistics)
             {
                 foreach(Food food in statistics.FoodList)

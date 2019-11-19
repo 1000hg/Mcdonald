@@ -129,7 +129,7 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="10,10,10,50" Width="100">
+                                <StackPanel Margin="10,10,10,50" Width="150">
                                     <Image Source="{Binding ImagePath}"  />
                                     <TextBlock Text="{Binding Name}"></TextBlock>
                                     <TextBlock Text="{Binding Count}"></TextBlock>

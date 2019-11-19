@@ -60,6 +60,7 @@
     <Compile Include="DataSource\SeatDataSource.cs" />
     <Compile Include="DataSource\StatisticsDataSource.cs" />
     <Compile Include="Manager\CategoryManager.cs" />
+    <Compile Include="View\Client.cs" />
     <Compile Include="View\LoadingCtrl.xaml.cs">
       <DependentUpon>LoadingCtrl.xaml</DependentUpon>
     </Compile>
