@@ -1,4 +1,5 @@
 ﻿using Mcdonald.DataSource;
+using Mcdonald.View;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,5 +16,6 @@ namespace Mcdonald
         public static FoodDataSource FoodData = new FoodDataSource();
         public static SeatDataSource SeatData = new SeatDataSource();
         public static StatisticsDataSource StatisticsData = new StatisticsDataSource();
+        public static Client client = new Client();
     }
 }

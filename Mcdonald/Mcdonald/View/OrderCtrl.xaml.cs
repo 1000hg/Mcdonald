@@ -39,7 +39,6 @@ namespace Mcdonald.View
 
         private List<Food> foods = new List<Food>();
 
-        Client client = new Client();
 
         private Seat seat = new Seat();
 
@@ -231,30 +230,27 @@ namespace Mcdonald.View
 
         private void PaymentEvent()
         {
-            if (client.ConnectServer())
+            /*if (App.client.IsConnected)
             {
-                client.SendMessage("@2207#" + seat.TotalPrice.ToString());
+                App.client.SendMessage("@2207#" + seat.TotalPrice.ToString());
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("서버가 연결되지 않았습니다. 다시 연결할까요? ", "Reload", MessageBoxButton.YesNoCancel);
+                MessageBoxResult result = MessageBox.Show("서버가 연결되지 않았습니다. 다시 연결할까요? ", "Reload", MessageBoxButton.YesNo);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        if (client.ConnectServer())
-                        {
-                            client.SendMessage("@2207");
-                            client.SendMessage("@2207#" + seat.TotalPrice.ToString());
-                        }
-                        break;
+                        App.client.ConnectServer();
+                        if(App.client.IsConnected)
+                            App.client.SendMessage("@2207");
+                      break;
                     case MessageBoxResult.No:
-                        //종료
-                        return;
-                    case MessageBoxResult.Cancel:
-                        //종료
+                        //this.Visibility = Visibility.Collapsed;
                         return;
                 }
-            }
+            }*/
+            App.client.SendMessage("@2207#" + seat.TotalPrice.ToString());
+
 
             InsertStatisticsData();
             UpdateFoodDataTotalPrice();
@@ -272,6 +268,12 @@ namespace Mcdonald.View
 
         private void UpdateFoodDataTotalPrice()
         {
+
+            foreach (Food food in App.FoodData.lstFood)
+            {
+                food.StatisticTotal = 0;
+            }
+
             foreach (Statistics statistics in App.StatisticsData.lstStatistics)
             {
                 foreach (Food payingFood in statistics.FoodList)
@@ -280,8 +282,7 @@ namespace Mcdonald.View
                     {
                         if (food.Name.Equals(payingFood.Name))
                         {
-                            food.StatisticTotal = payingFood.Count * payingFood.Price;
-
+                            food.StatisticTotal += payingFood.Count * payingFood.Price;
                         }
                     }
                 }

@@ -91,18 +91,30 @@ namespace Mcdonald.View
 
             Category category = (lvCategory.SelectedItem as Category);
 
-            foreach (Food food in App.FoodData.lstFood)
+            /*foreach (Food food in App.FoodData.lstFood)
             {
-                {
                     bool isSameCategory = checkCategory(food, category);
                     if (isSameCategory)
                     {
                         CategoryTotal += food.StatisticTotal;
                     }
+            }*/
+
+            foreach (Statistics statistics in App.StatisticsData.lstStatistics)
+            {
+                foreach (Food food in statistics.FoodList)
+                {
+                    bool isSameCategory = checkCategory(food, category);
+                    if (isSameCategory)
+                    {
+                        CategoryTotal += food.TotalPrice;
+                    }
+
                 }
+
             }
             categoryTotalText.Text = "총합 : " + CategoryTotal.ToString();
-            Debug.WriteLine("총합 : " + CategoryTotal.ToString());
+            //Debug.WriteLine("총합 : " + CategoryTotal.ToString());
             return CategoryTotal.ToString();
 
         }
@@ -115,17 +127,22 @@ namespace Mcdonald.View
                 graph.Visibility = Visibility.Hidden;
                 time.Visibility = Visibility.Visible;
                 totalChange.Content = "그래프";
+                UpdateDayTotal();
             }
             else
             {
                 graph.Visibility = Visibility.Visible;
                 time.Visibility = Visibility.Hidden;
                 totalChange.Content = "시간별";
+                categoryTotalText.Text = "총합 : " + findCategoryTotal();
+
             }
         }
 
+
         public void UpdateDayTotal()
         {
+            int oneDayTotal = 0;
             foods.Clear();
 
             foreach(Statistics statistics in App.StatisticsData.lstStatistics)
@@ -133,11 +150,18 @@ namespace Mcdonald.View
                 foreach(Food food in statistics.FoodList)
                 {
                     food.Date = statistics.Date;
-                    foods.Add(food);
+                    if(food.Date.Day == DateTime.Now.Day)
+                    {
+                        foods.Add(food);
+                        oneDayTotal += food.TotalPrice;
+                    }
+
                 }
 
             }
 
+            categoryTotalText.Text = "하루 : " + oneDayTotal.ToString();
+            oneDayTotal = 0;
             dayTotal.ItemsSource = foods;
             dayTotal.Items.Refresh();
         }
